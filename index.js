@@ -35,7 +35,7 @@ async function loadSettings() {
   notificationsEnabled = extension_settings[extensionName].notificationsEnabled;
 
   $("#notifications_enabled")
-    .prop("checked", autoLoadThemeFont)
+    .prop("checked", notificationsEnabled)
     .trigger("input");
 
   populateFontNames();
