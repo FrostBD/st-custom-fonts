@@ -1,1 +1,16 @@
-/* All style elements for your extension go here */
+/* Add spacing between the div elements */
+.custom_fonts-extension_block {
+    display: flex;
+    flex-direction: column;
+    padding: 20px; 
+    text-align: center;
+    vertical-align: middle;
+}
+
+#auto_load {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+
