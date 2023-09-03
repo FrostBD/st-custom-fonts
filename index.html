@@ -67,6 +67,24 @@
       </div>
 
       <div class="custom_fonts-extension_block flex-container">
+        <label>Theme Association</label>
+        <small><i id="hint">Associates the current theme with the selected font.</i></small>
+        <div id="auto_load">
+          <input
+            id="apply_theme_association"
+            class="menu_button"
+            type="submit"
+            value="Associate"
+          />
+        </div>
+          <div>
+            <small><i id="hint">Auto loads the associated font. Currently requres a refresh.</i></small>
+              <label for="auto_load_font_theme">Enabled</label>
+              <input id="auto_load_font_theme" type="checkbox" />
+            </div>
+      </div>  
+
+      <div class="custom_fonts-extension_block flex-container">
         <label for="selected_font_remove">Remove Font</label>
         <select id="selected_font_remove"></select>
         <input

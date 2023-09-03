@@ -7,6 +7,10 @@
     vertical-align: middle;
 }
 
+.custom_fonts-extension_block {
+    text-align: left;
+}
+
 #auto_load {
     display: flex;
     align-items: center;
