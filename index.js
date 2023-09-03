@@ -1,16 +1,11 @@
 // Finest 3.5-Turbo code
 
-
-
 import {
   extension_settings,
   loadExtensionSettings,
 } from "../../../extensions.js";
 
-
-import {
-  power_user,
-} from "../../../power-user.js";
+import { power_user } from "../../../power-user.js";
 
 //You'll likely need to import some other functions from the main script
 import { saveSettingsDebounced } from "../../../../script.js";
@@ -29,7 +24,6 @@ async function loadSettings() {
     Object.assign(extension_settings[extensionName], defaultSettings);
   }
 
-
   // Load fonts from settings
   const settingFonts = extension_settings[extensionName].fonts;
   fontInfo.googleFonts = fontInfo.googleFonts.concat(settingFonts.googleFonts);
@@ -38,23 +32,22 @@ async function loadSettings() {
   autoLoad = extension_settings[extensionName].autoLoad;
   autoLoadThemeFont = extension_settings[extensionName].autoLoadThemePreset;
   theme = power_user.theme;
+  notificationsEnabled = extension_settings[extensionName].notificationsEnabled;
+
+  $("#notifications_enabled")
+    .prop("checked", autoLoadThemeFont)
+    .trigger("input");
 
   populateFontNames();
 
   // Updating settings in the UI
 
   $("#auto_load_font_theme")
-  .prop("checked", autoLoadThemeFont)
-  .trigger("input");
-
-  $("#auto_load_font")
-    .prop("checked",  autoLoad)
+    .prop("checked", autoLoadThemeFont)
     .trigger("input");
 
-
-
+  $("#auto_load_font").prop("checked", autoLoad).trigger("input");
 }
-
 
 // Initialize a bigger object to store font information
 let fontInfo = {
@@ -70,7 +63,7 @@ let autoLoadThemeFont;
 
 let theme;
 
-
+var notificationsEnabled = false;
 
 function addThemeAssociation() {
   // Check if activeFont is in googleFonts
@@ -94,19 +87,33 @@ function addThemeAssociation() {
   // Your other logic here
   extension_settings[extensionName].fonts = fontInfo;
   saveSettingsDebounced();
-  toastr.success(
-    JSON.stringify(activeFont.name) + " was successfully associated with " + JSON.stringify(theme)
-  );
+  if (notificationsEnabled) {
+    toastr.success(
+      JSON.stringify(activeFont.name) +
+        " was successfully associated with " +
+        JSON.stringify(theme)
+    );
+  }
 }
 
+function onNotificationInput(event) {
+  const value = Boolean($(event.target).prop("checked"));
+  extension_settings[extensionName].notificationsEnabled = value;
+  saveSettingsDebounced();
+  notificationsEnabled = extension_settings[extensionName].notificationsEnabled;
+  if (notificationsEnabled) {
+    toastr.success("Notifiations turned: " + (value ? "on" : "off"));
+  }
+}
 
 function onAutoLoadInputTheme(event) {
   const value = Boolean($(event.target).prop("checked"));
   extension_settings[extensionName].autoLoadThemePreset = value;
   saveSettingsDebounced();
-  toastr.success("Theme association: " + (value ? "on" : "off"));
+  if (notificationsEnabled) {
+    toastr.success("Theme association: " + (value ? "on" : "off"));
+  }
 }
-
 
 function onAutoLoadInput(event) {
   const value = Boolean($(event.target).prop("checked"));
@@ -169,7 +176,9 @@ function addGoogleFont() {
   );
 
   if (existingFont) {
-    toastr.error(`Font "${googleFontName}" already exists in Google Fonts.`);
+    if (notificationsEnabled) {
+      toastr.error(`Font "${googleFontName}" already exists in Google Fonts.`);
+    }
   } else {
     // Create an object with name-value pairs and add it to the googleFonts array
     const googleFontObject = {
@@ -183,7 +192,9 @@ function addGoogleFont() {
     document.getElementById("google_font_link").value = "";
 
     // Print the updated fontInfo object for testing
-    toastr.success("Font added: " + JSON.stringify(googleFontName));
+    if (notificationsEnabled) {
+      toastr.success("Font added: " + JSON.stringify(googleFontName));
+    }
     populateFontNames();
   }
 }
@@ -197,7 +208,9 @@ function addLocalFont() {
   );
 
   if (existingFont) {
-    toastr.error(`Font "${localFontName}" already exists in Local Fonts.`);
+    if (notificationsEnabled) {
+      toastr.error(`Font "${localFontName}" already exists in Local Fonts.`);
+    }
   } else {
     // Create an object with name-value pairs and add it to the localFonts array
     const localFontObject = {
@@ -209,7 +222,9 @@ function addLocalFont() {
     document.getElementById("local_font_name").value = "";
 
     // Print the updated fontInfo object for testing
-    toastr.success("Font added: " + JSON.stringify(localFontName));
+    if (notificationsEnabled) {
+      toastr.success("Font added: " + JSON.stringify(localFontName));
+    }
   }
   populateFontNames();
 }
@@ -225,7 +240,9 @@ function removeFontByName() {
   fontInfo.localFonts = fontInfo.localFonts.filter(function (font) {
     return font.name !== fontName;
   });
-  toastr.success("Font removed: " + JSON.stringify(fontName));
+  if (notificationsEnabled) {
+    toastr.success("Font removed: " + JSON.stringify(fontName));
+  }
 }
 
 function loadGoogleFont(fontLink) {
@@ -243,8 +260,8 @@ function loadGoogleFont(fontLink) {
     var fontName = extractFontName(fontLink);
 
     // Set the font as the first font in the font family
-    document.body.style.fontFamily = fontName + ", 'Noto Color Emoji', sans-serif";
-
+    document.body.style.fontFamily =
+      fontName + ", 'Noto Color Emoji', sans-serif";
   });
 
   // Function to extract the font name from a Google Font URL
@@ -263,11 +280,11 @@ function loadSelectedFont() {
   const selectedOption = selectElement.options[selectElement.selectedIndex];
 
   if (!"Select a Font") {
-    toastr.error("Please select a font");
+    if (notificationsEnabled) {
+      toastr.error("Please select a font");
+    }
     return;
   }
-
-
 
   const selectedFontName = selectedOption.text;
   const isGoogleFont = fontInfo.googleFonts.some(
@@ -294,42 +311,50 @@ function loadSelectedFont() {
   }
   extension_settings[extensionName].activeFont = activeFont;
   saveSettingsDebounced();
-  toastr.success("Font loaded: " + JSON.stringify(selectedFontName));
+  if (notificationsEnabled) {
+    toastr.success("Font loaded: " + JSON.stringify(selectedFontName));
+  }
 }
-
 
 function setSelectedFontByAssociatedTheme() {
   // Check googleFonts for a font with the associated theme
-  const matchedGoogleFont = fontInfo.googleFonts.find((font) => font.associatedTheme === theme);
+  const matchedGoogleFont = fontInfo.googleFonts.find(
+    (font) => font.associatedTheme === theme
+  );
 
   // Check localFonts for a font with the associated theme
-  const matchedLocalFont = fontInfo.localFonts.find((font) => font.associatedTheme === theme);
+  const matchedLocalFont = fontInfo.localFonts.find(
+    (font) => font.associatedTheme === theme
+  );
 
   if (matchedGoogleFont) {
     // Set selected_font element to the matched Google Font
-    document.getElementById('selected_font').value = matchedGoogleFont.name;
+    document.getElementById("selected_font").value = matchedGoogleFont.name;
 
     // Call loadSelectedFont
     loadSelectedFont();
   } else if (matchedLocalFont) {
     // Set selected_font element to the matched Local Font
-    document.getElementById('selected_font').value = matchedLocalFont.name;
+    document.getElementById("selected_font").value = matchedLocalFont.name;
 
     // Call loadSelectedFont
     loadSelectedFont();
-    
+
     // Show success notification
-    toastr.success(`Selected font set to ${matchedLocalFont.name}`);
+    if (notificationsEnabled) {
+      toastr.success(`Selected font set to ${matchedLocalFont.name}`);
+    }
   } else {
     // Show a notification if no font with the associated theme was found
-    toastr.error(`No font with the associated theme '${theme}' found.`);
+    if (notificationsEnabled) {
+      toastr.error(`No font with the associated theme '${theme}' found.`);
+    }
   }
 }
 
-
-
 function setBodyFont(fontName) {
-  document.body.style.fontFamily = fontName + ", 'Noto Color Emoji', sans-serif";
+  document.body.style.fontFamily =
+    fontName + ", 'Noto Color Emoji', sans-serif";
 }
 
 // This function is called when the extension is loaded
@@ -346,12 +371,13 @@ jQuery(async () => {
   $("#google_font_submit_button").on("click", addGoogleFont);
   $("#apply_theme_association").on("click", addThemeAssociation);
   $("#auto_load_font_theme").on("input", onAutoLoadInputTheme);
+  $("#notifications_enabled").on("input", onNotificationInput);
   $("#local_font_submit_button").on("click", addLocalFont);
   $("#manual_load_font").on("click", loadSelectedFont);
   $("#selected_font_remove_submit_button").on("click", function () {
-    removeFontByName(); 
+    removeFontByName();
 
-    populateFontNames(); 
+    populateFontNames();
   });
   $("#auto_load_font").on("input", onAutoLoadInput);
 
@@ -365,14 +391,15 @@ jQuery(async () => {
     ) {
       loadSelectedFont();
     } else {
-      toastr.error(
-        "The selected font does not exist. Please choose another one."
-      );
+      if (notificationsEnabled) {
+        toastr.error(
+          "The selected font does not exist. Please choose another one."
+        );
+      }
     }
   }
 
   if (autoLoadThemeFont) {
     setSelectedFontByAssociatedTheme();
   }
-
 });
