@@ -1,5 +1,5 @@
 # ST Custom Fonts
-
+![sw](https://github.com/FrostBD/st-custom-fonts/assets/141382948/d5736eb9-5d46-4aef-8dbc-f445543d7008)
 *This extension allows you to use custom fonts in Silly Tavern*
 
 ## Features
