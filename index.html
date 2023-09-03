@@ -1,101 +1,112 @@
 <!-- You might want to add additional HTML elements to ST. 
     It's good practice to separate it out from your code -->
-<div class="example-extension-settings">
-  <div class="inline-drawer">
-    <div class="inline-drawer-toggle inline-drawer-header">
-      <b>Custom Fonts</b>
-      <div
-        class="inline-drawer-icon fa-solid fa-circle-chevron-down down"
-      ></div>
-    </div>
-    <div class="inline-drawer-content" id="custom-fonts">
-      <div class="custom_fonts-extension_block">
-        <div>
-          <label for="selected_font">Font Loading</label>
-          <select id="selected_font"></select>
+    <div class="example-extension-settings">
+      <div class="inline-drawer">
+        <div class="inline-drawer-toggle inline-drawer-header">
+          <b>Custom Fonts</b>
+          <div
+            class="inline-drawer-icon fa-solid fa-circle-chevron-down down"
+          ></div>
         </div>
-        <div id="auto_load">
-          <input
-            id="manual_load_font"
-            class="menu_button"
-            type="submit"
-            value="Apply current font"
-          />
-          <div>
-            <label for="auto_load_font">Load the font automatically</label>
-            <input id="auto_load_font" type="checkbox" />
-          </div>
-        </div>
-      </div>
-
-      <div class="custom_fonts-extension_block flex-container">
-        <label>Google Font</label>
-        <textarea
-          id="google_font_name"
-          class="text_pole textarea_compact"
-          rows="1"
-          placeholder="Font name"
-        ></textarea>
-        <textarea
-          id="google_font_link"
-          class="text_pole textarea_compact"
-          rows="1"
-          placeholder="Font link"
-        ></textarea>
-        <input
-          id="google_font_submit_button"
-          class="menu_button"
-          type="submit"
-          value="Add font"
-        />
-      </div>
-
-      <div class="custom_fonts-extension_block flex-container">
-        <label>Local Font</label>
-        <textarea
-          id="local_font_name"
-          class="text_pole textarea_compact"
-          rows="1"
-          placeholder="Font name"
-        ></textarea>
-        <input
-          id="local_font_submit_button"
-          class="menu_button"
-          type="submit"
-          value="Add font"
-        />
-      </div>
-
-      <div class="custom_fonts-extension_block flex-container">
-        <label>Theme Association</label>
-        <small><i id="hint">Associates the current theme with the selected font.</i></small>
-        <div id="auto_load">
-          <input
-            id="apply_theme_association"
-            class="menu_button"
-            type="submit"
-            value="Associate"
-          />
-        </div>
-          <div>
-            <small><i id="hint">Auto loads the associated font. Currently requres a refresh.</i></small>
-              <label for="auto_load_font_theme">Enabled</label>
-              <input id="auto_load_font_theme" type="checkbox" />
+        <div class="inline-drawer-content" id="custom-fonts">
+          <div class="custom_fonts-extension_block">
+            <div>
+              <label for="selected_font">Font Loading</label>
+              <select id="selected_font"></select>
             </div>
-      </div>  
-
-      <div class="custom_fonts-extension_block flex-container">
-        <label for="selected_font_remove">Remove Font</label>
-        <select id="selected_font_remove"></select>
-        <input
-          id="selected_font_remove_submit_button"
-          class="menu_button"
-          type="submit"
-          value="Remove font"
-        />
+            <div id="auto_load">
+              <input
+                id="manual_load_font"
+                class="menu_button"
+                type="submit"
+                value="Apply current font"
+              />
+              <div>
+                <label for="auto_load_font">Load the font automatically</label>
+                <input id="auto_load_font" type="checkbox" />
+              </div>
+            </div>
+          </div>
+    
+          <div class="custom_fonts-extension_block flex-container">
+            <label>Google Font</label>
+            <textarea
+              id="google_font_name"
+              class="text_pole textarea_compact"
+              rows="1"
+              placeholder="Font name"
+            ></textarea>
+            <textarea
+              id="google_font_link"
+              class="text_pole textarea_compact"
+              rows="1"
+              placeholder="Font link"
+            ></textarea>
+            <input
+              id="google_font_submit_button"
+              class="menu_button"
+              type="submit"
+              value="Add font"
+            />
+          </div>
+    
+          <div class="custom_fonts-extension_block flex-container">
+            <label>Local Font</label>
+            <textarea
+              id="local_font_name"
+              class="text_pole textarea_compact"
+              rows="1"
+              placeholder="Font name"
+            ></textarea>
+            <input
+              id="local_font_submit_button"
+              class="menu_button"
+              type="submit"
+              value="Add font"
+            />
+          </div>
+    
+          <div class="custom_fonts-extension_block flex-container">
+            <label>Theme Association</label>
+            <small><i id="hint">Associates the current theme with the selected font.</i></small>
+            <div id="auto_load">
+              <input
+                id="apply_theme_association"
+                class="menu_button"
+                type="submit"
+                value="Associate"
+              />
+            </div>
+              <div>
+                <small><i id="hint">Auto loads the associated font. Currently requres a refresh.</i></small>
+                  <label for="auto_load_font_theme">Enabled</label>
+                  <input id="auto_load_font_theme" type="checkbox" />
+                </div>
+          </div>  
+          
+    
+          <div class="custom_fonts-extension_block flex-container">
+            <label for="selected_font_remove">Remove Font</label>
+            <select id="selected_font_remove"></select>
+            <input
+              id="selected_font_remove_submit_button"
+              class="menu_button"
+              type="submit"
+              value="Remove font"
+            />
+          </div>
+    
+          <div class="custom_fonts-extension_block flex-container">
+            <label>Notifications</label>
+              <div>
+                  <label for="notifications_enabled">Enabled</label>
+                  <input id="notifications_enabled" type="checkbox" />
+                </div>
+            </div>  
+          
+    
+          <hr class="sysHR" />
+        </div>
       </div>
-
-      <hr class="sysHR" />
     </div>
-  </div>
-</div>
+    
