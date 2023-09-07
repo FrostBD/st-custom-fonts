@@ -63,7 +63,7 @@ let autoLoadThemeFont;
 
 let theme;
 
-var notificationsEnabled = false;
+var notificationsEnabled = true;
 
 function addThemeAssociation() {
   // Check if activeFont is in googleFonts
@@ -379,6 +379,13 @@ jQuery(async () => {
 
     populateFontNames();
   });
+  $("#themes").on("change", function () {
+    if (autoLoadThemeFont) {
+      theme = power_user.theme;
+      setSelectedFontByAssociatedTheme();
+    }
+  });
+
   $("#auto_load_font").on("input", onAutoLoadInput);
 
   // Load settings when starting things up (if you have any)

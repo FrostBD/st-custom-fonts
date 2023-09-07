@@ -4,7 +4,11 @@
 
 ## Features
 
-*It's possible to use local fonts or import them from Google Fonts.*
+- *It's possible to use local fonts or import them from Google Fonts.*
+
+- *Fonts can be added or removed from a list.*
+
+- *Fonts can be associated with a UI theme and automatically loaded when the theme changes.*
 
 ## Installation and Usage
 
