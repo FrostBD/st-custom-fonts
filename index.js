@@ -355,10 +355,13 @@ function setSelectedFontByAssociatedTheme() {
 function setBodyFont(fontName) {
   document.body.style.fontFamily =
     fontName + ", 'Noto Color Emoji', sans-serif";
+    
 }
 
 // This function is called when the extension is loaded
 jQuery(async () => {
+  //add a delay to possibly fix some conflicts
+  await new Promise(resolve => setTimeout(resolve, 3000));
   // This is an example of loading HTML from a file
   const settingsHtml = await $.get(`${extensionFolderPath}/index.html`);
 
