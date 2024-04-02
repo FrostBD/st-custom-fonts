@@ -147,6 +147,7 @@ function populateFontNames() {
 
   // Add font names from the googleFonts array to both dropdowns
   for (const googleFont of fontInfo.googleFonts) {
+    if (googleFont.name === activeFont.name) continue
     const option = document.createElement("option");
     option.text = googleFont.name;
     selectElement.appendChild(option);
@@ -155,6 +156,7 @@ function populateFontNames() {
 
   // Add font names from the localFonts array to both dropdowns
   for (const localFont of fontInfo.localFonts) {
+    if (localFont.name === activeFont.name) continue
     const option = document.createElement("option");
     option.text = localFont.name;
     selectElement.appendChild(option);
