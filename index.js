@@ -266,10 +266,10 @@ function loadGoogleFont(fontLink) {
 
   // Function to extract the font name from a Google Font URL
   function extractFontName(fontLink) {
-    var fontNameMatch = fontLink.match(/family=([^&]+)/);
+    var fontNameMatch = fontLink.match(/.+family=([^&]+)/);
     if (fontNameMatch && fontNameMatch[1]) {
-      var fontName = fontNameMatch[1].split(":wght@")[0];
-      return decodeURIComponent(fontName.replace(/\+/g, " "));
+      var fontName = fontNameMatch[1].split(":")[0];
+      return decodeURIComponent(fontName.replaceAll("+", " "));
     }
     return "";
   }
