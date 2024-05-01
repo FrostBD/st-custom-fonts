@@ -261,9 +261,13 @@ function loadGoogleFont(fontLink) {
     // Extract the font name from the fontLink
     var fontName = extractFontName(fontLink);
 
-    // Set the font as the first font in the font family
-    document.body.style.fontFamily =
-      fontName + ", 'Noto Color Emoji', sans-serif";
+    // Selecting elements
+    const elements = document.querySelectorAll("body, .font-family-reset, .swipes-counter, textarea, #send_textarea, .text_pole");
+
+    // Applying the font family to each selected element
+    elements.forEach((element) => {
+      element.style.fontFamily = `${fontName}, 'Noto Color Emoji', sans-serif`;
+    });
   });
 
   // Function to extract the font name from a Google Font URL
@@ -355,9 +359,13 @@ function setSelectedFontByAssociatedTheme() {
 }
 
 function setBodyFont(fontName) {
-  document.body.style.fontFamily =
-    fontName + ", 'Noto Color Emoji', sans-serif";
-    
+  // Selecting elements
+  const elements = document.querySelectorAll("body, .font-family-reset, .swipes-counter, textarea, #send_textarea, .text_pole");
+
+  // Applying the font family to each selected element
+  elements.forEach((element) => {
+    element.style.fontFamily = `${fontName}, 'Noto Color Emoji', sans-serif`;
+  });
 }
 
 // This function is called when the extension is loaded
