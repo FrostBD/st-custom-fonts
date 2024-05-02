@@ -150,6 +150,8 @@ function populateFontNames() {
     if (googleFont.name === activeFont.name) continue
     const option = document.createElement("option");
     option.text = googleFont.name;
+    option.style.fontFamily = googleFont.name;
+    option.style.cssText += `@import url('${googleFont.link}');`; 
     selectElement.appendChild(option);
     selectElementRemove.appendChild(option.cloneNode(true));
   }
@@ -159,6 +161,7 @@ function populateFontNames() {
     if (localFont.name === activeFont.name) continue
     const option = document.createElement("option");
     option.text = localFont.name;
+    option.style.fontFamily = localFont.name;
     selectElement.appendChild(option);
     selectElementRemove.appendChild(option.cloneNode(true));
   }
@@ -262,7 +265,7 @@ function loadGoogleFont(fontLink) {
     var fontName = extractFontName(fontLink);
 
     // Selecting elements
-    const elements = document.querySelectorAll("body, .font-family-reset, .swipes-counter, textarea, #send_textarea, .text_pole");
+    const elements = document.querySelectorAll("body, select, .menu_button, .font-family-reset, .swipes-counter, textarea, #send_textarea, .text_pole");
 
     // Applying the font family to each selected element
     elements.forEach((element) => {
@@ -360,7 +363,7 @@ function setSelectedFontByAssociatedTheme() {
 
 function setBodyFont(fontName) {
   // Selecting elements
-  const elements = document.querySelectorAll("body, .font-family-reset, .swipes-counter, textarea, #send_textarea, .text_pole");
+  const elements = document.querySelectorAll("body, select, .menu_button, .font-family-reset, .swipes-counter, textarea, #send_textarea, .text_pole");
 
   // Applying the font family to each selected element
   elements.forEach((element) => {
