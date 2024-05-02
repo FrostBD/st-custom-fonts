@@ -265,7 +265,7 @@ function loadGoogleFont(fontLink) {
     var fontName = extractFontName(fontLink);
 
     // Selecting elements
-    const elements = document.querySelectorAll("body, select, .menu_button, .font-family-reset, .swipes-counter, textarea, #send_textarea, .text_pole");
+    const elements = document.querySelectorAll("body, select, .font-family-reset, .swipes-counter, textarea, #send_textarea, .text_pole");
 
     // Applying the font family to each selected element
     elements.forEach((element) => {
@@ -363,7 +363,7 @@ function setSelectedFontByAssociatedTheme() {
 
 function setBodyFont(fontName) {
   // Selecting elements
-  const elements = document.querySelectorAll("body, select, .menu_button, .font-family-reset, .swipes-counter, textarea, #send_textarea, .text_pole");
+  const elements = document.querySelectorAll("body, select, .font-family-reset, .swipes-counter, textarea, #send_textarea, .text_pole");
 
   // Applying the font family to each selected element
   elements.forEach((element) => {
